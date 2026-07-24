@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using Microsoft.AspNetCore.Identity;
+using MySqlConnector;
 using UJConnect.Models;
 
 namespace UJConnect.Data
@@ -144,8 +145,46 @@ namespace UJConnect.Data
             return count > 0;
         }
 
-        public Boolean ResetPassword(String usernameOrStudentEmail, String newPassword)
+        public bool sendVerificationLink(User user) 
         {
+            return true;
+        }
+
+        public bool sendResetPasswordLink(User user)
+        {
+            return true;
+        }
+
+        public bool ResetPassword(User user, String newPassword)
+        {
+            //hash the password first
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            //sql query to change password
+            string sql = "UPDATE AppUser SET PasswordHash = @Password WHERE StudentEmail = @StudentEmail";
+
+            using var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+
+            //execute
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Password", hashedPassword);
+            command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
+
+            return true;
+        }
+
+        public bool deleteAccount(User user) {
+            //sql query to delete AppUser
+            string sql = "DELETE FROM AppUser WHERE StudentEmail = @StudentEmail";
+
+            using var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+
+            //execute
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
+
             return true;
         }
     }
