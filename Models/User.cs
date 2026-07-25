@@ -3,7 +3,7 @@
     public class User
     {
         public int UserID { get; private set; }
-        public string Username { get; private set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
         public string StudentEmail { get; private set; } = string.Empty;
 
         // Only ever populated when fetching for login verification -
