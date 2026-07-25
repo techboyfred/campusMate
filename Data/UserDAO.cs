@@ -197,6 +197,9 @@ namespace UJConnect.Data
             command.Parameters.AddWithValue("@Username", newUsername);
             command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
 
+            //update the object
+            user.Username = newUsername;
+
             return true;
         }
 
