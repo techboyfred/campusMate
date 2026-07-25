@@ -160,6 +160,11 @@ namespace UJConnect.Data
             //hash the password first
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
+            if (hashedPassword.Equals(user.PasswordHash))
+            {
+                return false; //new password cannot be old password
+            }
+
             //sql query to change password
             string sql = "UPDATE AppUser SET PasswordHash = @Password WHERE StudentEmail = @StudentEmail";
 
@@ -169,6 +174,27 @@ namespace UJConnect.Data
             //execute
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Password", hashedPassword);
+            command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
+
+            return true;
+        }
+
+        public bool ChangeUsername(User user, String newUsername)
+        {
+            if (newUsername.Equals(user.Username))
+            {
+                return false; //no change
+            }
+
+            //sql query to change password
+            string sql = "UPDATE AppUser SET Username = @Username WHERE StudentEmail = @StudentEmail";
+
+            using var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+
+            //execute
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Username", newUsername);
             command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
 
             return true;
