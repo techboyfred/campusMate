@@ -2,6 +2,11 @@
 using MySqlConnector;
 using UJConnect.Models;
 
+//for SMTP
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+
 namespace UJConnect.Data
 {
     public class UserDAO
@@ -20,7 +25,7 @@ namespace UJConnect.Data
             connection.Open();
 
             //sql query to get ALL the user's info from thr database
-            const string sql = "SELECT UserID, Username, StudentEmail, HashPassword, CreatedAt, NumReports FROM AppUser WHERE StudentEmail = @Email";
+            const string sql = "SELECT UserID, Username, StudentEmail, HashPassword, CreatedAt, NumReports FROM AppUser WHERE StudentEmail = @StudentEmail";
 
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@StudentEmail", studentEmail); //execute query with given email
@@ -98,7 +103,7 @@ namespace UJConnect.Data
 
             //sql query to register an account into the database
             const string sql = "INSERT INTO AppUser (Username, StudentEmail, HashPassword)" +
-                "VALUES (@username, @studentEmail, @hashPassword)";
+                " VALUES (@username, @studentEmail, @hashPassword)";
             using var command = new MySqlCommand(sql, connection);
 
             command.Parameters.AddWithValue("@username", user.Username);
@@ -108,11 +113,6 @@ namespace UJConnect.Data
             int rowsAffected = command.ExecuteNonQuery();
 
             return rowsAffected > 0;
-        }
-
-        public User? SearchUser(String usernameOrStudentEmail)
-        {
-            return null;
         }
 
         public Boolean EmailAlreadyExists(String studentEmail)
@@ -125,7 +125,7 @@ namespace UJConnect.Data
 
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Email", studentEmail);
-            int count = (int)command.ExecuteScalar();
+            long count = (long)command.ExecuteScalar();
 
             return count > 0;
         }
@@ -140,13 +140,77 @@ namespace UJConnect.Data
 
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Username", username);
-            int count = (int)command.ExecuteScalar();
+            long count = (long)command.ExecuteScalar();
 
             return count > 0;
         }
 
-        public bool sendVerificationLink(User user) 
+        public bool sendVerificationLink(User user, string smtpHost, int smtpPort, string smtpUsername, string smtpPassword) 
         {
+            string token = Guid.NewGuid().ToString("N"); // random, unguessable
+
+            //sql query to set the verification toek
+            const string sql = "UPDATE AppUser SET VerificationToken = @Token WHERE UserID = @UserID";
+
+            using var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+
+            //execute the query
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Token", token);
+            command.Parameters.AddWithValue("@UserID", user.UserID);
+            command.ExecuteNonQuery();
+
+            string verificationLink = $"https://campusMate.com/Verify/Confirm?token={token}";
+
+            //construct the email
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("campusMate", "noreply@campusMate.com"));
+            message.To.Add(new MailboxAddress(user.Username, user.StudentEmail));
+            message.Subject = "Verify your campusMate account";
+            message.Body = new TextPart("plain")
+            {
+                Text = $"Hi {user.Username}, \n\nVerify your account:\n{verificationLink}"
+            };
+
+            using var client = new SmtpClient();
+            client.Connect(smtpHost, smtpPort, SecureSocketOptions.StartTls);
+            client.Authenticate(smtpUsername, smtpPassword);
+            client.Send(message);
+            client.Disconnect(true);
+
+            return true; ;
+        }
+
+        public bool ConfirmVerificationToken(string token)
+        {
+            //sql query to find user with matching token
+            string sql = "SELECT * FROM AppUser WHERE VerificationToken = @Token";
+
+            using var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+
+            //execute the query
+            using var command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Token", token);
+
+            int userID;
+            using (var reader = command.ExecuteReader()) //reader is the user with the specified token
+            {
+                if (!reader.Read())
+                {
+                    return false; //token basically inalid or DNE
+                }
+                userID = reader.GetInt32("UserID");
+            }
+            
+
+            //sql query to (1) update UerVerified and (2) delete the token
+            string updateSql = "UPDATE AppUser SET UserVerified = true, VerificationToken = NULL WHERE UserID = @UserID";
+            using var updateCommand = new MySqlCommand(updateSql, connection);
+            updateCommand.Parameters.AddWithValue("@UserID", userID);
+            updateCommand.ExecuteNonQuery();
+
             return true;
         }
 
@@ -155,18 +219,23 @@ namespace UJConnect.Data
             return true;
         }
 
+        public User? FindUserByResetToken(string token)
+        {
+            return null;
+        }
+
         public bool ResetPassword(User user, String newPassword)
         {
             //hash the password first
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
 
-            if (hashedPassword.Equals(user.PasswordHash))
+            if (BCrypt.Net.BCrypt.Verify(newPassword, user.PasswordHash))
             {
                 return false; //new password cannot be old password
             }
 
             //sql query to change password
-            string sql = "UPDATE AppUser SET PasswordHash = @Password WHERE StudentEmail = @StudentEmail";
+            string sql = "UPDATE AppUser SET HashPassword = @Password WHERE StudentEmail = @StudentEmail";
 
             using var connection = new MySqlConnection(_connectionString);
             connection.Open();
@@ -175,6 +244,7 @@ namespace UJConnect.Data
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Password", hashedPassword);
             command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
+            command.ExecuteNonQuery();
 
             return true;
         }
@@ -196,6 +266,7 @@ namespace UJConnect.Data
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Username", newUsername);
             command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
+            command.ExecuteNonQuery();
 
             //update the object
             user.Username = newUsername;
@@ -203,7 +274,11 @@ namespace UJConnect.Data
             return true;
         }
 
-        public bool deleteAccount(User user) {
+        public bool deleteAccount(User user, string plainPassword) {
+            bool passwordverified = BCrypt.Net.BCrypt.Verify(plainPassword, user.PasswordHash);
+            if (!passwordverified)
+                return false; //stop reset if user cant verify their password
+            
             //sql query to delete AppUser
             string sql = "DELETE FROM AppUser WHERE StudentEmail = @StudentEmail";
 
@@ -215,6 +290,22 @@ namespace UJConnect.Data
             command.Parameters.AddWithValue("@StudentEmail", user.StudentEmail);
 
             return true;
+        }
+
+        public User? SearchUser(String usernameOrStudentEmail)
+        {
+            return null;
+        }
+
+        public User GetUserByID(int userID) {
+            User user = null;
+            
+            return user;
+        }
+
+        public void IncrementReportCount(int userID)
+        {
+
         }
     }
 }
