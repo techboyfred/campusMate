@@ -14,7 +14,7 @@ An application designed for UJ students to connect with each other through an on
 ## Technologies Used
 - UI: HTML & CSS
 - Language: c#
-- Database: MySQL (hosted on [Aiven](https://aiven.io)) |
+- Database: MySQL (hosted on [Aiven](https://aiven.io))
 - DB Connectivity: MySQL Connector (via NuGet Packages)
 - Password Security: BCrypt (via NuGet Packages)
 - IDE: Visual Studio (2019)
@@ -60,7 +60,6 @@ ProductivityTracker/
 ├── Controllers/
 │   ├── HomeController.cs
 │   ├── MarketLoginController.cs
-│   ├── MarketLoginByEmailController.cs
 │   ├── ProfileController.cs
 │   └── RegisterController.cs
 ├── wwwroot/
@@ -77,8 +76,6 @@ ProductivityTracker/
     |   └── Register.cshtml
     ├── MarketLogin/ 
     |   └── MarketLogin.cshtml
-    ├── MarketLoginByEmail/ 
-    |   └── MarketLoginByEmail.cshtml
     ├── MarketHome/ 
     |   └── MarketHome.cshtml
     ├── Profile/ 
