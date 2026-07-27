@@ -14,6 +14,12 @@ namespace UJConnect.Controllers
         {
             _userDAO = userDAO;
         }
+         /*Forgot password page*/
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
 
         //GET: /MarkertLogin/MarketLogin, this will be the empty login form
         [HttpGet]
