@@ -1,0 +1,74 @@
+﻿<!--User log in section-->
+<!--NO footer or header-->
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Card Login — uiCookies</title>
+
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+    <!--LOGO-->
+    <form class="card" onsubmit="event.preventDefault()">
+        <img src="~/images/campusMateLogo.png" alt="CampusMate Logo" class="logo" />
+
+       
+        <h2 class="uj-title">University of Johannesburg</h2>
+
+        <p class="campusmate-title">
+            campus<span>Mate</span>
+        </p>
+
+        <h1>Sign in</h1>
+        <p class="sub">Use your student email to continue.</p>
+
+        <div class="field">
+            <input type="email"
+                   id="em"
+                    placeholder="Email"
+                   autocomplete="email"
+                   required />
+            <label for="em">Student Email or Username</label>
+        </div>
+
+        <div class="field">
+            <input type="password"
+                   id="pw"
+                   placeholder="Password"
+                   autocomplete="current-password"
+                   required />
+            <label for="pw">Password</label>
+
+            <button type="button"
+                    class="peek"
+                    aria-label="Show password"
+                    onclick="const p=document.getElementById('pw'); p.type=p.type==='password'?'text':'password'; this.textContent=p.type==='password'?'SHOW':'HIDE';">
+                SHOW
+            </button>
+        </div>
+
+        <button class="go" type="submit">
+            Continue
+        </button>
+        <div class="meta">
+            <a asp-controller="MarketLogin"
+               asp-action="ForgotPassword">
+                Forgot password?
+            </a>
+
+            <span>
+                No account?
+                <a asp-controller="Register"
+                   asp-action="Register">
+                    Sign up
+                </a>
+            </span>
+        </div>
+    </form>
+</body>
+</html>
