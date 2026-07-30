@@ -113,7 +113,11 @@ ProductivityTracker/
 
 ## Future Enhancements
 - [ ] Improve and modernize the GUI, especially when the application is used on a mobile device
-- [ ] Implent or Improve fraud detection methods
+- [ ] Implement  or Improve fraud detection methods
+- [ ] Feature extension (Lost and found) ,The user can browse through the lost items which will not be having any picture  and provide us with hints to prove ownership.
+- [ ] We can also have a section where the person who found the item post it with specific keywords to describe it , and another section which allows the user to describe         the item and it matches them with the most accurate but they must also answer more specific questions afterwards to prove ownership.      
+
+    
 
 ## Authors
 ### **Freddy Senamela**
