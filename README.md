@@ -115,11 +115,12 @@ ProductivityTracker/
 - [ ] Improve and modernize the GUI, especially when the application is used on a mobile device
 - [ ] Implement  or Improve fraud detection methods
 - [ ] Feature extension (Lost and found) ,The user can browse through the lost items which will not be having any picture  and provide us with hints to prove ownership.
-- [ ] We can also have a section where the person who found the item post it with specific keywords to describe it , and another section which allows the user to describe         the item and it matches them with the most accurate but they must also answer more specific questions afterwards to prove ownership.      
+- [ ] We can also have a section where the person who found the item post it with specific keywords to describe it , and another section which allows the user to describe         the item and it matches them with the most accurate but they must also answer more specific questions afterwards to prove ownership.
+- [ ] (*in first year we struggled a lot with finding classes fred , so a section for students ( the focus is in first years) where they can enter a specific class e.g
+      B-less 100 and then it locates them from where they are might be necessary ..     
 
     
-
-## Authors
+# Authors
 ### **Freddy Senamela**
 - University of Johannesburg
 - freddymailula@gmail.com
