@@ -1,0 +1,80 @@
+    <div class="topbar">
+        <div class="wordmark">campus<span>Mate</span></div>
+
+        <details class="account-menu">
+            @*
+            <summary>@Model.Username &#9662;</summary>
+            *@
+            <div class="account-dropdown">
+                <a asp-controller="Profile" asp-action="Profile">Profile</a>
+                <a asp-controller="Seller" asp-action="SellerHome">Seller Page</a>
+                <a asp-controller="Admin" asp-action="Index">Admin</a>
+                <a asp-controller="MarketLogin" asp-action="Logout">Logout</a>
+            </div>
+        </details>
+    </div>
+
+    <div class="page-body">
+        <h1 class="page-title">MarketPlace</h1>
+
+        <div class="toolbar">
+            <select id="filterBy">
+                <option value="">Filter by type</option>
+                <option value="GROCERY">Grocery</option>
+                <option value="CLOTHING">Clothing</option>
+                <option value="STATIONERY">Stationery</option>
+                <option value="ELECTRONICS">Electronics</option>
+                <option value="OTHER">Other</option>
+            </select>
+
+            <select id="arrangeBy">
+                <option value="relevance">Relevance</option>
+                <option value="newest">Newly added</option>
+                <option value="price_asc">Price: Lowest to highest</option>
+                <option value="price_desc">Price: Highest to lowest</option>
+            </select>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." />
+            <button class="clear-btn" type="button" onclick="document.getElementById('searchInput').value=''">&times;</button>
+        </div>
+   @*
+       @if (Model.Products != null && Model.Products.Count > 0)
+        {
+            <div class="product-grid">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="product-card">
+                        <div class="product-photo">
+                            @if (!string.IsNullOrEmpty(product.ImagePath))
+                            {
+                                <img src="@product.ImagePath" alt="@product.ProductName" />
+                            }
+                            else
+                            {
+                                <span>No photo</span>
+                            }
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">@product.ProductName</div>
+                            <div class="product-price">R@product.LowestPackagePrice</div>
+                            <div class="product-actions">
+                                <button class="icon-btn" title="@product.ProductDescription">&#9432;</button>
+                                <a class="btn btn-primary" asp-controller="ProductEnquiry" asp-action="Enquire" asp-route-productId="@product.ProductID">Get</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">No products match right now — check back soon, or clear your filters.</div>
+        }
+        *@
+        <div class="back-row">
+            <a class="btn btn-outline" asp-controller="Home" asp-action="Index">Back</a>
+        </div>
+    </div>
+
