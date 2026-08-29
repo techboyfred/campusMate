@@ -27,9 +27,13 @@ ProductivityTracker/
 ├── README.md
 ├── docs/
 │   ├── changeLog.md
+│   ├── billOfMaterials.xlsx
+│   ├── productOverview.pdf
 │   ├── erd.pdf
-│   ├── modelsUMLDesign.pdf
-│   └── daoUMLDesign.pdf
+│   ├── daoUmlDesign.pdf
+│   └── pics/
+    │   ├── 14-08-26.jpg
+    │   └── 14-08-26(2).jpg
 ├── Models/
 │   ├── ActionType.cs
 │   ├── Administrator.cs
