@@ -7,13 +7,13 @@ An application designed for UJ students to connect with each other through an on
 - Online student market
 - Apply to be a tutor
 - Find a tutor or study partner
-- Join offical UJ Clubs and Societies
+- Join offiical UJ Clubs and Societies
 
 ---
 
 ## Technologies Used
 - UI: HTML & CSS
-- Language: c#
+- Backend: c#
 - Database: MySQL (hosted on [Aiven](https://aiven.io))
 - DB Connectivity: MySQL Connector (via NuGet Packages)
 - Password Security: BCrypt (via NuGet Packages)
@@ -32,8 +32,8 @@ ProductivityTracker/
 │   ├── erd.pdf
 │   ├── daoUmlDesign.pdf
 │   └── pics/
-    │   ├── 14-08-26.jpg
-    │   └── 14-08-26(2).jpg
+|       ├── 14-08-26.jpg
+|       └── 14-08-26(2).jpg
 ├── Models/
 │   ├── ActionType.cs
 │   ├── Administrator.cs
@@ -74,16 +74,20 @@ ProductivityTracker/
 │   ├── Header/
 │   └── images/
 └── Views/
+    ├── Admin/
+    |   └── Admin.cshtml
     ├── Home/
     |   └── Home.cshtml
-    ├── Register/ 
-    |   └── Register.cshtml
-    ├── MarketLogin/ 
-    |   └── MarketLogin.cshtml
     ├── MarketHome/ 
     |   └── MarketHome.cshtml
+    ├── MarketLogin/ 
+    |   └── MarketLogin.cshtml
     ├── Profile/ 
     |   └── Profile.cshtml
+    ├── Register/ 
+    |   └── Register.cshtml
+    ├── SellerHome/ 
+    |   └── SellerHome.cshtml
     ├── Shared/
     |   ├── _Layout.cshtml
     |   ├── _Layout.cshtml.css
@@ -97,7 +101,7 @@ ProductivityTracker/
 2. View all products added to the student market
 3. Buyer: Enquire with seller about buying (a) product(s)
 4. Buyer: search for a specific product
-5. Buyer: Control product views by either filtering or sorting the products by their preffered arrangement
+5. Buyer: Control product views by either filtering or sorting the products by their preferred arrangement
 6. Seller: Add products they sell
 7. Seller: Specify availability times to simplify meeting arrangements
 8. Seller: Confirm meetup with the buyer
@@ -134,10 +138,5 @@ ProductivityTracker/
 - University of Johannesburg
 - deltonovela@gmail.com
 - www.linkedin.com/in/delton-novela-820541402
-
-##  License
-This project is open source and available under the MIT License.
-
-## Acknowledgements
 
 ## Screenshots
