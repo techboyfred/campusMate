@@ -31,7 +31,8 @@ ProductivityTracker/
 │   ├── productOverview.pdf
 │   ├── erd.pdf
 │   ├── daoUmlDesign.pdf
-│   └── pics/
+│   ├── modelsUmlDesign.pdf
+│   └── FQA_Proof/
 |       ├── 14-08-26.jpg
 |       └── 14-08-26(2).jpg
 ├── Models/
