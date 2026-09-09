@@ -1,0 +1,308 @@
+@model UJConnect.Models.AdminDashboardViewModel
+@using UJConnect.Models
+@{
+    Layout = null;
+
+    string TagClass(ReportType type) => type switch
+    {
+        ReportType.FRAUD => "tag-fraud",
+        ReportType.NO_SHOW => "tag-noshow",
+        ReportType.PRODUCT_ISSUE => "tag-product",
+        _ => "tag-other"
+    };
+
+    string TagLabel(ReportType type) => type switch
+    {
+        ReportType.FRAUD => "Fraud",
+        ReportType.NO_SHOW => "No-show",
+        ReportType.PRODUCT_ISSUE => "Product issue",
+        _ => "Other"
+    };
+
+    string Truncate(string text, int max) => text.Length > max ? text.Substring(0, max) + "..." : text;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — CampusMate</title>
+    <link rel="stylesheet" href="~/css/marketplace.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="wordmark">campus<span>Mate</span></div>
+        <div class="admin-badge">Administrator</div>
+    </div>
+
+    <div class="page-body">
+        <h1 class="page-title">Admin Dashboard</h1>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-error">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["InfoMessage"] != null)
+        {
+            <div class="alert alert-info">@TempData["InfoMessage"]</div>
+        }
+
+        <div class="stat-row">
+            <div class="stat-card alert-stat">
+                <div class="stat-number">@Model.UnresolvedReports.Count</div>
+                <div class="stat-label">Unresolved reports</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">@Model.PendingTutorApplications.Count</div>
+                <div class="stat-label">Pending tutor applications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">@Model.TotalStudentCount</div>
+                <div class="stat-label">Total students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">@Model.ActiveClubCount</div>
+                <div class="stat-label">Active clubs</div>
+            </div>
+        </div>
+
+        <!-- (1) Student search -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Find a Student</h2>
+            </div>
+            <form asp-controller="Admin" asp-action="Admin" method="get">
+                <div class="search-bar">
+                    <input type="text" name="query" value="@Model.SearchQuery" placeholder="Search by username or student email..." />
+                    <button class="clear-btn" type="submit">&#128269;</button>
+                </div>
+            </form>
+
+            @if (string.IsNullOrEmpty(Model.SearchQuery))
+            {
+                <p class="search-hint">Start typing to search registered students.</p>
+            }
+            else if (Model.SearchResults.Count == 0)
+            {
+                <div class="empty-state">No students match "@Model.SearchQuery".</div>
+            }
+            else
+            {
+                <div class="list-card">
+                    @foreach (var student in Model.SearchResults)
+                    {
+                        <div class="list-row">
+                            <div class="list-main">
+                                <div class="list-title">@student.Username</div>
+                                <div class="list-sub">@student.StudentEmail &middot; @student.NumReports report(s) against them</div>
+                            </div>
+                            <div class="list-meta">
+                                <a class="btn btn-outline" asp-controller="Admin" asp-action="ViewUserReports" asp-route-userId="@student.UserID">View Reports</a>
+                                <form asp-controller="Admin" asp-action="SuspendUser" asp-route-userId="@student.UserID" method="post" style="display:inline;">
+                                    <button type="submit" class="btn-danger-outline">Suspend</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Flagged users - surfaces patterns, tied to the original fraud-protection design -->
+        @if (Model.FlaggedUsers.Count > 0)
+        {
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Flagged Users</h2>
+                </div>
+                <div class="list-card">
+                    @foreach (var user in Model.FlaggedUsers)
+                    {
+                        <div class="flag-row">
+                            <div class="list-main">
+                                <div class="list-title">@user.Username</div>
+                                <div class="list-sub">@user.StudentEmail</div>
+                            </div>
+                            <div class="list-meta">
+                                <span class="flag-count">@user.NumReports reports</span>
+                                <a class="btn btn-danger-outline" asp-controller="Admin" asp-action="ViewUserReports" asp-route-userId="@user.UserID">Review</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <!-- (2) Unresolved reports -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Unresolved Reports <span class="section-count">@Model.UnresolvedReports.Count</span></h2>
+                <a class="section-link" asp-controller="Admin" asp-action="ResolvedReports">View resolved reports &rarr;</a>
+            </div>
+
+            @if (Model.UnresolvedReports.Count == 0)
+            {
+                <div class="empty-state">No unresolved reports right now.</div>
+            }
+            else
+            {
+                <div class="list-card">
+                    @foreach (var report in Model.UnresolvedReports)
+                    {
+                        <a class="list-row clickable" asp-controller="Admin" asp-action="ReportDetail" asp-route-id="@report.ReportID">
+                            <div class="list-main">
+                                <div class="list-title">
+                                    Reported by @report.ReportedByUser.Username against
+                                    @(report.ReportedProduct != null ? $"\"{report.ReportedProduct.ProductName}\"" : report.ReportedUser.Username)
+                                </div>
+                                <div class="list-sub">"@Truncate(report.ReportText, 60)"</div>
+                            </div>
+                            <div class="list-meta">
+                                <span class="tag @TagClass(report.ReportType)">@TagLabel(report.ReportType)</span>
+                                <span class="list-date">@report.ReportedAt.ToString("MMM dd")</span>
+                                <span class="chevron">&#8250;</span>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- (3) Tutor applications -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tutor Applications <span class="section-count">@Model.PendingTutorApplications.Count</span></h2>
+            </div>
+
+            @if (Model.PendingTutorApplications.Count == 0)
+            {
+                <div class="empty-state">No pending tutor applications.</div>
+            }
+            else
+            {
+                <div class="list-card">
+                    @foreach (var application in Model.PendingTutorApplications)
+                    {
+                        <a class="list-row clickable" asp-controller="Admin" asp-action="TutorApplicationDetail" asp-route-id="@application.ApplicationID">
+                            <div class="list-main">
+                                <div class="list-title">@application.Tutor.Username &mdash; @application.ModuleRegistration.ModuleCode</div>
+                                <div class="list-sub">Final mark: @application.ModuleRegistration.FinalMark% &middot; R@application.Rate.Price/@application.Rate.RatePeriod.ToString().ToLower()</div>
+                            </div>
+                            <div class="chevron">&#8250;</div>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- (4) Campus locations -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Campus Locations</h2>
+                <button class="btn btn-primary" onclick="openModal('venueModal')">+ Add New</button>
+            </div>
+            @if (Model.Venues.Count == 0)
+            {
+                <div class="empty-state">No campus locations added yet.</div>
+            }
+            else
+            {
+                <div class="list-card">
+                    @foreach (var venue in Model.Venues)
+                    {
+                        <div class="list-row">
+                            <div class="list-main">
+                                <div class="list-title">@venue.LocationName</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- (5) Clubs -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Clubs &amp; Societies</h2>
+                <button class="btn btn-primary" onclick="openModal('clubModal')">+ Add New</button>
+            </div>
+            @if (Model.Clubs.Count == 0)
+            {
+                <div class="empty-state">No clubs added yet.</div>
+            }
+            else
+            {
+                <div class="list-card">
+                    @foreach (var club in Model.Clubs)
+                    {
+                        <div class="list-row">
+                            <div class="list-main">
+                                <div class="list-title">@club.Name</div>
+                                <div class="list-sub">@club.CurrentCapacity / @club.MaxCapacity members</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <!-- Add Campus Location modal -->
+    <div class="modal-overlay" id="venueModal">
+        <div class="modal">
+            <form asp-controller="Admin" asp-action="AddVenue" method="post">
+                <h3>Add Campus Location</h3>
+                <label for="campusSelect">Campus</label>
+                <select id="campusSelect" name="campusName" required>
+                    <option value="APK">APK</option>
+                    <option value="APB">APB</option>
+                    <option value="SWC">SWC</option>
+                    <option value="DFC">DFC</option>
+                </select>
+                <label for="locationName">Location Name</label>
+                <input type="text" id="locationName" name="locationName" placeholder="e.g. Library Entrance" required />
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('venueModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Club modal -->
+    <div class="modal-overlay" id="clubModal">
+        <div class="modal">
+            <form asp-controller="Admin" asp-action="AddClub" method="post">
+                <h3>Add Club</h3>
+                <label for="clubName">Club Name</label>
+                <input type="text" id="clubName" name="name" placeholder="e.g. Robotics Society" required />
+                <label for="clubDescription">Description</label>
+                <textarea id="clubDescription" name="description" rows="3" placeholder="What does this club do?" required></textarea>
+                <label for="regFee">Registration Fee (R)</label>
+                <input type="number" step="0.01" id="regFee" name="registrationFee" placeholder="0.00" required />
+                <label for="memFee">Membership Fee (R)</label>
+                <input type="number" step="0.01" id="memFee" name="membershipFee" placeholder="0.00" required />
+                <label for="maxCap">Max Capacity</label>
+                <input type="number" id="maxCap" name="maxCapacity" placeholder="e.g. 50" required />
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('clubModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    </script>
+
+</body>
+</html>

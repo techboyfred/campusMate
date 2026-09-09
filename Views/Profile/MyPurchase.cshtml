@@ -1,0 +1,308 @@
+﻿@{
+    ViewData["Title"] = "My Purchases";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row row-mtm align-items-lg-start">
+
+            <!-- LEFT SIDEBAR -->
+            <div class="col-12 col-lg-4 col-xl-3">
+
+                <div class="ap-info">
+
+                    <div class="ap-author ptb-30 plr-15 extra-bg text-center border-radius">
+
+                        <div class="profile-image-wrapper">
+                            <img src="~/images/profile/default-profile.png"
+                                 class="width-72 img-fluid rounded-circle"
+                                 alt="Profile picture">
+                        </div>
+
+                        <div class="ap-ac mst-26">
+
+                            <h6 class="font-18">
+                                Delton Novela
+                            </h6>
+
+                            <span class="d-inline-block mst-7">
+                                @@DeltonNovela
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="ap-profile">
+
+                        <a asp-action="MyProfile"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-user-settings-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                My Profile
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="MyPurchase"
+                           class="primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon primary-color icon-16 mer-5">
+                                <i class="ri-shopping-bag-3-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                My Purchases
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="MyListing"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-price-tag-3-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                My Listings
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="Notifications"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-notification-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Notifications
+                            </span>
+
+                            <span class="ap-count extra-color font-12 d-flex align-items-center justify-content-center secondary-bg rounded-circle">
+                                3
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="VerifyAccount"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-shield-check-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                Verify Account
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="ChangePassword"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-lock-password-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                Change Password
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="DeleteAccount"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-delete-bin-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                Delete Account
+                            </span>
+
+                        </a>
+
+
+                        <a asp-action="Logout"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-logout-box-line"></i>
+                            </span>
+
+                            <span class="ap-name">
+                                Logout
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT CONTENT -->
+            <div class="col-12 col-lg-8 col-xl-9">
+
+                <div class="ap-detail">
+
+                    <div class="acc-info">
+
+                        <div class="acc-title">
+
+                            <h6 class="font-18">
+                                My Purchases
+                            </h6>
+
+                        </div>
+
+                        <div class="acc-detail mst-22">
+
+                            <!-- PURCHASE -->
+
+                            <div class="purchase-item ptb-20 border-top">
+
+                                <div class="row align-items-center">
+
+                                    <div class="col-12 col-md-7">
+
+                                        <h6 class="font-16">
+                                            Java Programming Textbook
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            Seller: @@StudentSeller
+                                        </span>
+
+                                        <span class="d-block mst-5">
+                                            Transaction: CM-1025
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12 col-md-5 text-md-end mt-15 mt-md-0">
+
+                                        <strong>
+                                            R250
+                                        </strong>
+
+                                        <span class="d-block mst-7">
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PURCHASE -->
+
+                            <div class="purchase-item ptb-20 border-top">
+
+                                <div class="row align-items-center">
+
+                                    <div class="col-12 col-md-7">
+
+                                        <h6 class="font-16">
+                                            Scientific Calculator
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            Seller: @@CampusTech
+                                        </span>
+
+                                        <span class="d-block mst-5">
+                                            Transaction: CM-1026
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12 col-md-5 text-md-end mt-15 mt-md-0">
+
+                                        <strong>
+                                            R350
+                                        </strong>
+
+                                        <span class="d-block mst-7">
+                                            Pending
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PURCHASE -->
+
+                            <div class="purchase-item ptb-20 border-top">
+
+                                <div class="row align-items-center">
+
+                                    <div class="col-12 col-md-7">
+
+                                        <h6 class="font-16">
+                                            Computer Science Notes
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            Seller: @@CSStudent
+                                        </span>
+
+                                        <span class="d-block mst-5">
+                                            Transaction: CM-1027
+                                        </span>
+
+                                    </div>
+
+                                    <div class="col-12 col-md-5 text-md-end mt-15 mt-md-0">
+
+                                        <strong>
+                                            R80
+                                        </strong>
+
+                                        <span class="d-block mst-7">
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

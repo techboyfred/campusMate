@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/profile.css" />
+
+<div class="profile-page">
+
+    <div class="profile-container">
+
+        <a asp-controller="Profile"
+           asp-action="MyProfile">
+            ← Back to My Profile
+        </a>
+
+        <h1>Edit Profile</h1>
+
+        <p>
+            Update the information displayed on your CampusMate profile.
+        </p>
+
+
+        <form asp-controller="Profile"
+              asp-action="EditProfile"
+              method="post"
+              enctype="multipart/form-data">
+
+            <div>
+
+                <label for="ProfilePicture">
+                    Profile Picture
+                </label>
+
+                <input type="file"
+                       id="ProfilePicture"
+                       name="ProfilePicture"
+                       accept="image/*" />
+
+            </div>
+
+
+            <div>
+
+                <label for="Username">
+                    Username
+                </label>
+
+                <input type="text"
+                       id="Username"
+                       name="Username"
+                       value="DeltonNovela"
+                       required />
+
+            </div>
+
+
+            <div>
+
+                <label for="DisplayName">
+                    Display Name
+                </label>
+
+                <input type="text"
+                       id="DisplayName"
+                       name="DisplayName"
+                       value="Delton" />
+
+            </div>
+
+
+            <div>
+
+                <label for="Bio">
+                    Bio
+                </label>
+
+                <textarea id="Bio"
+                          name="Bio"
+                          placeholder="Tell other CampusMate users a little about yourself..."></textarea>
+
+            </div>
+
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+            <a asp-controller="Profile"
+               asp-action="MyProfile">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

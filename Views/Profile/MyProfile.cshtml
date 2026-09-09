@@ -1,0 +1,448 @@
+﻿@{
+    ViewData["Title"] = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row row-mtm align-items-lg-start">
+
+            <!-- =========================
+                 LEFT PROFILE SIDEBAR
+            ========================== -->
+
+            <div class="col-12 col-lg-4 col-xl-3 p-lg-sticky top-0">
+
+                <div class="ap-info">
+
+                    <!-- Profile information -->
+                    <div class="ap-author">
+
+                        <!-- Verification Banner -->
+                        <a asp-controller="Profile"
+                           asp-action="VerifyAccount"
+                           class="verify-banner">
+
+                            <i class="fa fa-exclamation-circle"></i>
+                            <span>Account Not Verified</span>
+
+                        </a>
+
+                        <!-- Profile Picture -->
+                        <div class="author-img">
+                            <img src="~/assets/images/profile/default-user.jpg" alt="Profile">
+                        </div>
+
+                        <!-- User Information -->
+                        <div class="ap-ac">
+
+                            <h6>Delton Novela</h6>
+
+                            <span>@@DeltonNovela</span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- =========================
+                         PROFILE NAVIGATION
+                    ========================== -->
+
+                    <div class="ap-profile">
+
+
+                        <!-- My Profile -->
+
+                        <a asp-controller="Profile"
+                           asp-action="MyProfile"
+                           class="primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon primary-color icon-16 mer-5">
+                                <i class="ri-user-settings-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                My Profile
+                            </span>
+
+                        </a>
+
+
+                        <!-- My Purchases -->
+
+                        <a asp-controller="Profile"
+                           asp-action="MyPurchase"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-shopping-bag-3-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                My Purchases
+                            </span>
+
+                        </a>
+
+
+                        <!-- My Listings -->
+
+                        <a asp-controller="Profile"
+                           asp-action="MyListing"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-price-tag-3-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                My Listings
+                            </span>
+
+                        </a>
+
+
+                        <!-- Notifications -->
+                        <a asp-controller="Profile"
+                           asp-action="Notifications"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-notification-3-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Notifications
+                            </span>
+
+                            <span class="notification-count">
+                                3
+                            </span>
+                        </a>
+
+
+                        <!-- Verify Account -->
+
+                        <a asp-controller="Profile"
+                           asp-action="VerifyAccount"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-shield-check-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Verify Account
+                            </span>
+
+                        </a>
+
+
+                        <!-- Change Password -->
+
+                        <a asp-controller="Profile"
+                           asp-action="ChangePassword"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-lock-password-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Change Password
+                            </span>
+
+                        </a>
+
+
+                        <!-- Delete Account -->
+
+                        <a asp-controller="Profile"
+                           asp-action="DeleteAccount"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-delete-bin-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Delete Account
+                            </span>
+
+                        </a>
+
+
+                        <!-- Logout -->
+
+                        <a asp-controller="Profile"
+                           asp-action="Logout"
+                           class="body-primary-color d-flex align-items-center justify-content-between ptb-15 plr-15">
+
+                            <span class="ap-icon body-color icon-16 mer-5">
+                                <i class="ri-logout-box-line"></i>
+                            </span>
+
+                            <span class="ap-name me-auto">
+                                Logout
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT CONTENT
+            ========================== -->
+
+            <div class="col-12 col-lg-8 col-xl-9 p-lg-sticky top-0">
+
+                <div class="ap-detail">
+
+                    <form asp-controller="Profile"
+                          asp-action="EditProfile"
+                          method="post"
+                          enctype="multipart/form-data">
+
+
+                        <!-- =========================
+                             PROFILE INFORMATION
+                        ========================== -->
+
+                        <div class="ap-detail-info">
+
+                            <div class="acc-info">
+
+                                <div class="acc-title d-flex align-items-center justify-content-between">
+
+                                    <h6 class="font-18">
+                                        Profile information
+                                    </h6>
+
+                                </div>
+
+
+                                <div class="acc-detail mst-22">
+
+                                    <div class="acc-detail-form">
+
+                                        <div class="acc-detail-field">
+
+                                            <div class="row field-row">
+
+
+                                                <!-- Username -->
+
+                                                <div class="col-12 col-md-6 field-col">
+
+                                                    <label for="username"
+                                                           class="field-label">
+
+                                                        Username
+
+                                                    </label>
+
+                                                    <input type="text"
+                                                           id="username"
+                                                           name="Username"
+                                                           class="w-100"
+                                                           value="DeltonNovela"
+                                                           placeholder="Username">
+
+                                                </div>
+
+
+                                                <!-- Display Name -->
+
+                                                <div class="col-12 col-md-6 field-col">
+
+                                                    <label for="displayName"
+                                                           class="field-label">
+
+                                                        Display name
+
+                                                    </label>
+
+                                                    <input type="text"
+                                                           id="displayName"
+                                                           name="DisplayName"
+                                                           class="w-100"
+                                                           value="Delton Novela"
+                                                           placeholder="Display name">
+
+                                                </div>
+
+
+                                                <!-- Student Number -->
+
+                                                <div class="col-12 col-md-6 field-col">
+
+                                                    <label for="studentNumber"
+                                                           class="field-label">
+
+                                                        Student number
+
+                                                    </label>
+
+                                                    <input type="text"
+                                                           id="studentNumber"
+                                                           name="StudentNumber"
+                                                           class="w-100"
+                                                           value="S225004268"
+                                                           readonly>
+
+                                                </div>
+
+
+                                                <!-- University -->
+
+                                                <div class="col-12 col-md-6 field-col">
+
+                                                    <label for="university"
+                                                           class="field-label">
+
+                                                        University
+
+                                                    </label>
+
+                                                    <input type="text"
+                                                           id="university"
+                                                           name="University"
+                                                           class="w-100"
+                                                           value="University of Johannesburg"
+                                                           readonly>
+
+                                                </div>
+
+
+                                                <!-- Bio -->
+
+                                                <div class="col-12 field-col">
+
+                                                    <label for="bio"
+                                                           class="field-label">
+
+                                                        About me
+
+                                                    </label>
+
+                                                    <textarea id="bio"
+                                                              name="Bio"
+                                                              class="w-100"
+                                                              rows="4"
+                                                              placeholder="Tell other students a little about yourself..."></textarea>
+
+                                                </div>
+
+
+                                                <!-- Profile Picture -->
+
+                                                <div class="col-12 field-col">
+
+                                                    <label class="field-label">
+                                                        Profile picture
+                                                    </label>
+
+                                                    <div class="field-attachment ptb-30 plr-15 plr-sm-30 text-center">
+
+                                                        <div class="img-upload d-flex flex-column align-items-center">
+
+                                                            <label for="profile-img"
+                                                                   class="img-file-upload primary-link text-decoration-underline">
+
+                                                                Upload here
+
+                                                            </label>
+
+                                                            <div class="mst-10 meb-26">
+
+                                                                Upload image 512px X 512px
+
+                                                            </div>
+
+                                                            <input type="file"
+                                                                   id="profile-img"
+                                                                   name="ProfilePicture"
+                                                                   class="w-100 img-file"
+                                                                   hidden
+                                                                   accept="image/*">
+
+
+                                                            <div class="field-attached">
+
+                                                                <img src="~/images/profile/default-profile.png"
+                                                                     class="img-fluid img-preview border-radius"
+                                                                     alt="Profile picture">
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Buttons -->
+
+                                    <div class="ap-profile-button mst-20 mst-sm-30">
+
+                                        <div class="row btn-row">
+
+                                            <div class="col-12 col-sm-6 col-xl-3">
+
+                                                <button type="submit"
+                                                        class="w-100 acc-save btn-style quaternary-btn">
+
+                                                    Save & Close
+
+                                                </button>
+
+                                            </div>
+
+
+                                            <div class="col-12 col-sm-6 col-xl-3">
+
+                                                <a asp-controller="Profile"
+                                                   asp-action="MyProfile"
+                                                   class="w-100 acc-cancel btn-style secondary-btn">
+
+                                                    Cancel
+
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

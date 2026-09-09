@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Delete Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <div class="acc-info">
+
+                    <div class="acc-detail ptb-40 plr-15 plr-sm-30 text-center">
+
+
+                        <div class="icon-48">
+
+                            <i class="ri-delete-bin-line"></i>
+
+                        </div>
+
+
+                        <h5 class="mst-20">
+                            Delete your account?
+                        </h5>
+
+
+                        <p class="mst-10">
+
+                            You are about to permanently delete your
+                            CampusMate account.
+
+                        </p>
+
+
+                        <p class="mst-10">
+
+                            Your account will no longer be available
+                            to you after this action.
+
+                        </p>
+
+
+                        <p class="mst-10">
+
+                            <strong>
+                                This action cannot be undone.
+                            </strong>
+
+                        </p>
+
+
+                        <form asp-action="DeleteAccountConfirmed"
+                              method="post"
+                              class="mst-30">
+
+
+                            <button type="submit"
+                                    class="btn-style secondary-btn">
+
+                                Permanently Delete Account
+
+                            </button>
+
+
+                            <a asp-action="MyProfile"
+                               class="btn-style quaternary-btn">
+
+                                Cancel
+
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

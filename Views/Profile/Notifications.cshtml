@@ -1,0 +1,237 @@
+﻿@{
+    ViewData["Title"] = "Notifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row row-mtm align-items-lg-start">
+
+            <!-- SIDEBAR -->
+
+            <div class="col-12 col-lg-4 col-xl-3">
+
+                <div class="ap-info">
+
+                    <div class="ap-author ptb-30 plr-15 extra-bg text-center border-radius">
+
+                        <img src="~/images/profile/default-profile.png"
+                             class="width-72 img-fluid rounded-circle"
+                             alt="Profile picture">
+
+                        <div class="ap-ac mst-26">
+
+                            <h6 class="font-18">
+                                Delton Novela
+                            </h6>
+
+                            <span class="d-inline-block mst-7">
+                                @@DeltonNovela
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ap-profile">
+
+                        <a asp-action="MyProfile"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-user-settings-line icon-16 mer-5"></i>
+                            <span class="ap-name">My Profile</span>
+
+                        </a>
+
+                        <a asp-action="MyPurchase"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-shopping-bag-3-line icon-16 mer-5"></i>
+                            <span class="ap-name">My Purchases</span>
+
+                        </a>
+
+                        <a asp-action="MyListing"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-price-tag-3-line icon-16 mer-5"></i>
+                            <span class="ap-name">My Listings</span>
+
+                        </a>
+
+                        <a asp-action="Notifications"
+                           class="primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-notification-line icon-16 mer-5"></i>
+
+                            <span class="ap-name me-auto">
+                                Notifications
+                            </span>
+
+                            <span class="ap-count extra-color font-12 d-flex align-items-center justify-content-center secondary-bg rounded-circle">
+                                3
+                            </span>
+
+                        </a>
+
+                        <a asp-action="VerifyAccount"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-shield-check-line icon-16 mer-5"></i>
+                            <span class="ap-name">Verify Account</span>
+
+                        </a>
+
+                        <a asp-action="ChangePassword"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-lock-password-line icon-16 mer-5"></i>
+                            <span class="ap-name">Change Password</span>
+
+                        </a>
+
+                        <a asp-action="DeleteAccount"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-delete-bin-line icon-16 mer-5"></i>
+                            <span class="ap-name">Delete Account</span>
+
+                        </a>
+
+                        <a asp-action="Logout"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+
+                            <i class="ri-logout-box-line icon-16 mer-5"></i>
+                            <span class="ap-name">Logout</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="col-12 col-lg-8 col-xl-9">
+
+                <div class="ap-detail">
+
+                    <div class="acc-info">
+
+                        <div class="acc-title">
+
+                            <h6 class="font-18">
+                                Notifications
+                            </h6>
+
+                        </div>
+
+
+                        <div class="acc-detail mst-22">
+
+
+                            <div class="notification-item ptb-20 border-top">
+
+                                <div class="d-flex">
+
+                                    <div class="icon-20 mer-15">
+                                        <i class="ri-shopping-bag-3-line"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <h6 class="font-16">
+                                            Purchase request accepted
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            Your purchase request for the Scientific Calculator was accepted.
+                                        </span>
+
+                                        <small class="d-block mst-7">
+                                            Today
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="notification-item ptb-20 border-top">
+
+                                <div class="d-flex">
+
+                                    <div class="icon-20 mer-15">
+                                        <i class="ri-price-tag-3-line"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <h6 class="font-16">
+                                            Someone is interested in your listing
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            A student has shown interest in your Java Programming Textbook.
+                                        </span>
+
+                                        <small class="d-block mst-7">
+                                            Today
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="notification-item ptb-20 border-top">
+
+                                <div class="d-flex">
+
+                                    <div class="icon-20 mer-15">
+                                        <i class="ri-shield-check-line"></i>
+                                    </div>
+
+                                    <div>
+
+                                        <h6 class="font-16">
+                                            Verify your CampusMate account
+                                        </h6>
+
+                                        <span class="d-block mst-7">
+                                            Your account is currently not verified.
+                                        </span>
+
+                                        <small class="d-block mst-7">
+                                            Yesterday
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

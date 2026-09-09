@@ -1,0 +1,195 @@
+﻿@{
+    ViewData["Title"] = "Verify Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row row-mtm align-items-lg-start">
+
+            <!-- SIDEBAR -->
+
+            <div class="col-12 col-lg-4 col-xl-3">
+
+                <div class="ap-info">
+
+                    <div class="ap-author ptb-30 plr-15 extra-bg text-center border-radius">
+
+                        <img src="~/images/profile/default-profile.png"
+                             class="width-72 img-fluid rounded-circle"
+                             alt="Profile picture">
+
+                        <div class="ap-ac mst-26">
+
+                            <h6 class="font-18">
+                                Delton Novela
+                            </h6>
+
+                            <span class="d-inline-block mst-7">
+                                @@DeltonNovela
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ap-profile">
+
+                        <a asp-action="MyProfile"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-user-settings-line icon-16 mer-5"></i>
+                            <span>My Profile</span>
+                        </a>
+
+                        <a asp-action="MyPurchase"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-shopping-bag-3-line icon-16 mer-5"></i>
+                            <span>My Purchases</span>
+                        </a>
+
+                        <a asp-action="MyListing"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-price-tag-3-line icon-16 mer-5"></i>
+                            <span>My Listings</span>
+                        </a>
+
+                        <a asp-action="Notifications"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-notification-line icon-16 mer-5"></i>
+                            <span>Notifications</span>
+                        </a>
+
+                        <a asp-action="VerifyAccount"
+                           class="primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-shield-check-line icon-16 mer-5"></i>
+                            <span>Verify Account</span>
+                        </a>
+
+                        <a asp-action="ChangePassword"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-lock-password-line icon-16 mer-5"></i>
+                            <span>Change Password</span>
+                        </a>
+
+                        <a asp-action="DeleteAccount"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-delete-bin-line icon-16 mer-5"></i>
+                            <span>Delete Account</span>
+                        </a>
+
+                        <a asp-action="Logout"
+                           class="body-primary-color d-flex align-items-center ptb-15 plr-15">
+                            <i class="ri-logout-box-line icon-16 mer-5"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="col-12 col-lg-8 col-xl-9">
+
+                <div class="ap-detail">
+
+                    <div class="acc-info">
+
+                        <div class="acc-title">
+
+                            <h6 class="font-18">
+                                Account verification
+                            </h6>
+
+                        </div>
+
+
+                        <div class="acc-detail mst-22">
+
+                            <div class="text-center ptb-30">
+
+                                <div class="icon-48">
+
+                                    <i class="ri-shield-check-line"></i>
+
+                                </div>
+
+
+                                <h5 class="mst-20">
+                                    Your account is not verified
+                                </h5>
+
+
+                                <p class="mst-10">
+
+                                    Verify your CampusMate account to help
+                                    build trust within the student community.
+
+                                </p>
+
+
+                                <div class="verification-info text-start mst-30">
+
+                                    <div class="ptb-15 border-top">
+
+                                        <i class="ri-check-line mer-10"></i>
+
+                                        Build trust with other students
+
+                                    </div>
+
+
+                                    <div class="ptb-15 border-top">
+
+                                        <i class="ri-check-line mer-10"></i>
+
+                                        Help keep CampusMate safer
+
+                                    </div>
+
+
+                                    <div class="ptb-15 border-top">
+
+                                        <i class="ri-check-line mer-10"></i>
+
+                                        Confirm your student account
+
+                                    </div>
+
+                                </div>
+
+
+                                <form asp-action="VerifyAccount"
+                                      method="post"
+                                      class="mst-30">
+
+                                    <button type="submit"
+                                            class="btn-style secondary-btn">
+
+                                        Verify Account
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

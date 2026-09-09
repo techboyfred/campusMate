@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Logout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="account-page section-ptb">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <div class="acc-info text-center">
+
+                    <div class="acc-detail ptb-40">
+
+                        <div class="icon-48">
+
+                            <i class="ri-logout-box-line"></i>
+
+                        </div>
+
+
+                        <h5 class="mst-20">
+                            Logout of CampusMate?
+                        </h5>
+
+
+                        <p class="mst-10">
+
+                            Are you sure you want to log out of your
+                            CampusMate account?
+
+                        </p>
+
+
+                        <form asp-action="LogoutConfirmed"
+                              method="post"
+                              class="mst-30">
+
+                            <button type="submit"
+                                    class="btn-style secondary-btn">
+
+                                Yes, Logout
+
+                            </button>
+
+                            <a asp-action="MyProfile"
+                               class="btn-style quaternary-btn">
+
+                                Cancel
+
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

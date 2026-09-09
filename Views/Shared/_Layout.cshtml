@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Sprylo</title>
+
+    <meta name="description" content="Sprylo is a free modern HTML template for tech and electronics stores." />
+    <meta name="theme-color" content="#4F46E5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" />
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="~/Assets/css/styles.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/profile.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Top Utility Bar -->
+    <div class="utility">
+        <div class="container">
+
+            <span class="promo">
+                <span class="tag">SALE</span>
+                Free shipping on orders over $50 · 30-day returns
+            </span>
+
+            <span class="links">
+                <a href="#">Track Order</a>
+                <a href="#">Help</a>
+                <a href="#">EN · USD</a>
+            </span>
+
+        </div>
+    </div>
+        <!-- Header -->
+    <header class="site-header">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a asp-controller="MarketHome"
+               asp-action="MarketHome"
+               class="brand">
+
+                <img src="~/images/CampusMateLogo.png"
+                     alt="CampusMate Logo"
+                     class="logo" />
+
+                <span class="brand-text">CampusMate</span>
+
+            </a>
+
+            <!-- Search -->
+            <form class="search"
+                  role="search"
+                  onsubmit="event.preventDefault();">
+
+                <input type="text"
+                       placeholder="Search for products, textbooks, laptops..."
+                       aria-label="Search" />
+
+                <button type="submit"
+                        aria-label="Search">
+
+                    <svg width="18"
+                         height="18"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2.2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="M21 21l-4.3-4.3"></path>
+
+                    </svg>
+
+                </button>
+
+            </form>
+
+            <!-- Icons -->
+            <div class="icon-row">
+
+                <!-- Account -->
+                <a asp-controller="Profile"
+                   asp-action="MyProfile"
+                   class="icon-btn"
+                   aria-label="Account">
+
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path>
+
+                    </svg>
+
+                </a>
+
+                <!-- Wishlist -->
+                <a href="#"
+                   class="icon-btn"
+                   aria-label="Wishlist">
+
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+
+                    </svg>
+
+                    <span class="count">3</span>
+
+                </a>
+
+                <!-- Cart -->
+                <a asp-controller="MarketHome"
+                   asp-action="MarketCart"
+                   class="icon-btn icon-btn--cart"
+                   aria-label="Cart">
+
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <path d="M6 2l-2 5v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-2-5z"></path>
+                        <path d="M4 7h16"></path>
+                        <path d="M16 11a4 4 0 0 1-8 0"></path>
+
+                    </svg>
+
+                    <span class="count">2</span>
+
+                </a>
+
+                <!-- Mobile Menu -->
+                <button class="nav-toggle"
+                        aria-label="Open Menu"
+                        aria-expanded="false">
+
+                    ☰
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+    <!-- Navigation -->
+    <nav class="nav-bar" aria-label="Primary Navigation">
+
+        <div class="container">
+
+            <a asp-controller="MarketHome"
+               asp-action="MarketHome"
+               class="all-cats">
+
+                <svg width="16"
+                     height="16"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2.4"
+                     stroke-linecap="round">
+
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+
+                </svg>
+
+                All Categories
+
+            </a>
+
+            <div class="main-nav">
+
+                <a asp-controller="MarketHome"
+                   asp-action="MarketHome">
+                    Home
+                </a>
+
+                <a asp-controller="MarketHome"
+                   asp-action="MarketShop">
+                    Shop
+                </a>
+
+                <a asp-controller="MarketHome"
+                   asp-action="MarketProduct">
+                    Products
+                </a>
+
+                <a asp-controller="MarketHome"
+                   asp-action="MarketCart">
+                    Cart
+                </a>
+
+                <a asp-controller="MarketHome"
+                   asp-action="MarketContact">
+                    Contact
+                </a>
+
+            </div>
+
+            <span class="nav-cta">
+                UP TO <strong>60% OFF</strong> ALL ITEMS
+            </span>
+
+        </div>
+
+    </nav>
+
+    <!-- Mobile Menu -->
+
+    <div class="drawer"
+         id="drawer"
+         aria-hidden="true">
+
+        <div class="drawer-head">
+
+            <a asp-controller="MarketHome"
+               asp-action="MarketHome"
+               class="brand">
+
+                <span class="brand-mark">S</span>
+                Sprylo
+
+            </a>
+
+            <button class="drawer-close"
+                    aria-label="Close Menu">
+
+                Close ✕
+
+            </button>
+
+        </div>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketHome">
+            Home
+        </a>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketShop">
+            Shop
+        </a>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketProduct">
+            Products
+        </a>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketCart">
+            Cart
+        </a>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketContact">
+            Contact
+        </a>
+
+        <a asp-controller="MarketHome"
+           asp-action="MarketCart"
+           class="btn btn--indigo"
+           style="margin-top:var(--s5); justify-content:center">
+
+            View Cart →
+
+        </a>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="login-background">
+
+        <main id="main"
+              role="main"
+              class="pb-3">
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+
+                    <a asp-controller="MarketHome"
+                       asp-action="MarketHome"
+                       class="brand footer-brand-logo">
+
+                        <img src="~/images/CampusMateLogo.png"
+                             alt="CampusMate Logo"
+                             class="logo" />
+
+                        <span class="brand-text">CampusMate</span>
+
+                    </a>
+
+
+                    <p class="footer-description">
+                        Modern tech &amp; gadgets — straight from the makers,
+                        shipped fast, supported well.
+                        Since 2018, we've moved over 400,000 boxes.
+                    </p>
+
+
+                </div>
+
+                <!-- Popular Categories -->
+                <div class="footer-col">
+
+                    <h4>Popular Categories</h4>
+
+                    <ul>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Laptops &amp; Desktops
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Smart Home Electronics
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Smart Watches
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Headphones
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Internal Components
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketShop">
+                                Virtual Reality Headsets
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Help -->
+                <div class="footer-col">
+
+                    <h4>Let us help you</h4>
+
+                    <ul>
+
+                        <li><a href="#">My Account</a></li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketCart">
+                                My Order
+                            </a>
+                        </li>
+
+                        <li><a href="#">Shipping Policy</a></li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketContact">
+                                Help Centre
+                            </a>
+                        </li>
+
+                        <li><a href="#">Events</a></li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketProduct">
+                                Popular Products
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-col">
+
+                    <h4>Resources</h4>
+
+                    <ul>
+
+                        <li><a href="#">Blog</a></li>
+
+                        <li><a href="#">Newsletter</a></li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketContact">
+                                Help Centre
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketContact">
+                                Support
+                            </a>
+                        </li>
+
+                        <li><a href="#">Reviews</a></li>
+
+                    </ul>
+
+                </div>
+
+                <!-- About -->
+                <div class="footer-col">
+
+                    <h4>Get To Know Us</h4>
+
+                    <ul>
+
+                        <li><a href="#">About Us</a></li>
+
+                        <li>
+                            <a asp-controller="MarketHome"
+                               asp-action="MarketContact">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li><a href="#">Login / Register</a></li>
+
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+
+                        <li><a href="#">Privacy Policy</a></li>
+
+                        <li><a href="#">FAQs</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Sprylo · All rights reserved
+                </span>
+
+                <span>
+                    Free HTML template · No framework · No build step.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <!-- JavaScript -->
+    <script src="~/Assets/js/main.js"
+            asp-append-version="true"
+            defer></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
