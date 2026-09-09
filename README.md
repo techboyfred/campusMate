@@ -32,6 +32,7 @@ ProductivityTracker/
 │   ├── billOfMaterials.xlsx
 │   ├── holisticBuild.pdf
 │   ├── pitchDeck.pdf
+│   ├── markertabilityAndValidation.pdf
 │   ├── designs/
 |   |   ├── erd.pdf
 |   |   ├── dataUmlDesign.pdf
